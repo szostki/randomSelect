@@ -1,7 +1,7 @@
 from __future__ import division
 import random
 from pyfiglet import Figlet
-from asciimatics.effects import Cog, Print
+from asciimatics.effects import Cog, Print, Cycle
 from asciimatics.renderers import FigletText
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
@@ -11,10 +11,10 @@ import sys
 
 autoTeam = [
     'Pawel',
-    # 'Dawid',
+    'Dawid',
     'Monika',
     'Darek', 
-    # 'Michal', 
+    'Michal', 
     'Marcin', 
     ]
 
@@ -30,6 +30,13 @@ def demo(screen):
         Cog(screen, 60, 25, 15, direction=-1),
         Print(screen, FigletText(f.renderText(secure_random.choice(autoTeam)), font="term"), x=45, y=22, start_frame=60)
     ]
+
+    effects.append( Print(screen, FigletText(f.renderText('Super team na dzis:'), font='term'), x=90, y=int(0)))
+    currentMemberIndex = 1
+    for member in autoTeam:
+        effects.append( Print(screen, FigletText(f.renderText(member), font='term'), x=120, y=int(7 * currentMemberIndex)+2))
+        currentMemberIndex += 1
+
     screen.play([Scene(effects, -1)], stop_on_resize=True)
 
 while True:
